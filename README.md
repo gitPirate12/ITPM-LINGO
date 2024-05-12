@@ -71,3 +71,4 @@ To run tests for this project, use the following command:
 
 ```bash
 npm test
+![ss1](https://github.com/gitPirate12/ITPM-LINGO/assets/103246434/86dc55ca-349c-4bcf-ac67-bcf89bc8fe1e)
