@@ -71,7 +71,3 @@ To run tests for this project, use the following command:
 
 ```bash
 npm test
-
-
-
-
