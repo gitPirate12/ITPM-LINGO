@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/ITPM-LINGO/static/css/main.d005ec3d.css",
+    "main.js": "/ITPM-LINGO/static/js/main.edaed08d.js",
+    "static/media/logo.jpg": "/ITPM-LINGO/static/media/logo.2bd7fb025d22dc90f933.jpg",
+    "index.html": "/ITPM-LINGO/index.html",
+    "main.d005ec3d.css.map": "/ITPM-LINGO/static/css/main.d005ec3d.css.map",
+    "main.edaed08d.js.map": "/ITPM-LINGO/static/js/main.edaed08d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d005ec3d.css",
+    "static/js/main.edaed08d.js"
+  ]
+}
