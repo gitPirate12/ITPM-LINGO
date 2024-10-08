@@ -53,6 +53,7 @@
     "dotenv": "^16.4.5",
     "ee-first": "^1.1.1",
     "emoji-regex": "^8.0.0",
+    "emoji-text": "file:",
     "encodeurl": "^1.0.2",
     "encoding": "^0.1.13",
     "escape-html": "^1.0.3",
