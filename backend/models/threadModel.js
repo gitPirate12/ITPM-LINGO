@@ -25,9 +25,10 @@ const threadSchema = new Schema(
       type: [String],
       default: [],
     },
-    voteCount: {
-      type: Number,
-      default: 0,
+    likes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
     },
   },
   { timestamps: true }

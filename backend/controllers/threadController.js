@@ -1,168 +1,111 @@
-const Post = require('../models/threadModel')
-const mongoose = require('mongoose')
-const requireAuth = require('../middleware/requireAuth')
+const Thread = require("../models/threadModel");
+const mongoose = require("mongoose");
+const requireAuth = require("../middleware/requireAuth");
 
-
-
-//get all threads
-const getposts = async (req, res) => {
-    try {
-        const posts = await Post.find({}).sort({ createdAt: -1 });
-        res.status(200).json(posts);
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-}
-
-
-
-//get a single thread
-const getPost = async(req,res) =>{
-    const {id} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such post'})
-    }
-    const post = await Post.findById(id)
-
-    if (!post) {
-        return res.status(404).json({error: 'No such post'})
-    }
-
-    res.status(200).json(post)
-}
-
-
-
-// Create a new  thread
-const createPost = async (req, res) => {
-    const { question, description, tags } = req.body; // Destructure tags from req.body
-    const author = req.user._id; // Get the authenticated user's ID from the request
-
-    // Add document to the database
-    try {
-        const post = await Post.create({ question, description, author, tags }); // Pass tags to Post.create
-        res.status(200).json(post);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
-
-
-//delete a thread
-
-const deletePost = async(req,res) =>{
-    const {id} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such post'})
-    }
-
-    const post = await Post.findOneAndDelete({_id: id})
-
-    if (!post) {
-        return res.status(404).json({error: 'No such post'})
-    }
-
-    res.status(200).json(post)
-}
-//update a thread
-const updatePost = async(req,res) =>{
-    const {id} = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such post'})
-    }
-
-    const post = await Post.findOneAndUpdate({_id: id},{
-        ...req.body
-    })
-
-    if (!post) {
-        return res.status(404).json({error: 'No such post'})
-    }
-
-    res.status(200).json(post)
-}
-
-
-
-const increaseVoteCount = async (req, res) => {
-    try {
-        // Extract the post ID from the request parameters
-        const { id } = req.params;
-
-        // Check if the received ID is a valid MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(404).json({ error: 'No such post' });
-        }
-
-        // Find the post in the database based on the provided ID
-        const post = await Post.findById(id);
-
-        // If no post is found with the provided ID, return a 404 error
-        if (!post) {
-            return res.status(404).json({ error: 'No such post' });
-        }
-
-        // Increment the voteCount by 1
-        post.voteCount += 1;
-
-        // Save the updated post
-        await post.save();
-
-        // Return the updated post with a 200 status
-        res.status(200).json(post);
-    } catch (error) {
-        // If an error occurs during the execution of the function, return a 500 error
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+const getThreads = async (req, res) => {
+  try {
+    const threads = await Thread.find({}).sort({ createdAt: -1 });
+    res.status(200).json(threads);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
-const decreaseVoteCount = async (req, res) => {
-    try {
-        // Extract the post ID from the request parameters
-        const { id } = req.params;
+const getThread = async (req, res) => {
+  const { id } = req.params;
 
-        // Check if the received ID is a valid MongoDB ObjectId
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(404).json({ error: 'No such post' });
-        }
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such thread" });
+  }
+  const thread = await Thread.findById(id);
 
-        // Find the post in the database based on the provided ID
-        const post = await Post.findById(id);
+  if (!thread) {
+    return res.status(404).json({ error: "No such thread" });
+  }
 
-        // If no post is found with the provided ID, return a 404 error
-        if (!post) {
-            return res.status(404).json({ error: 'No such post' });
-        }
-
-        // Ensure voteCount never goes below 0
-        if (post.voteCount > 0) {
-            // Decrement the voteCount by 1
-            post.voteCount -= 1;
-        }
-
-        // Save the updated post
-        await post.save();
-
-        // Return the updated post with a 200 status
-        res.status(200).json(post);
-    } catch (error) {
-        // If an error occurs during the execution of the function, return a 500 error
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+  res.status(200).json(thread);
 };
 
+const createThread = async (req, res) => {
+  const { headline, body, tags } = req.body;
+  const author = req.user._id;
 
+  try {
+    const thread = await Thread.create({ headline, body, author, tags });
+    res.status(200).json(thread);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const deleteThread = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such thread" });
+  }
+  const thread = await Thread.findOneAndDelete({ _id: id });
+  if (!thread) {
+    return res.status(404).json({ error: "No such thread" });
+  }
+  res.status(200).json(thread);
+};
+
+const updateThread = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such thread" });
+  }
+
+  const thread = await Thread.findOneAndUpdate(
+    { _id: id },
+    {
+      ...req.body,
+    },
+    { new: true }
+  );
+
+  if (!thread) {
+    return res.status(404).json({ error: "No such thread" });
+  }
+
+  res.status(200).json(thread);
+};
+
+const toggleLike = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user._id;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "No such thread" });
+    }
+    const thread = await Thread.findById(id);
+    if (!thread) {
+      return res.status(404).json({ error: "No such thread" });
+    }
+    const likeIndex = thread.likes.indexOf(userId);
+
+    if (likeIndex === -1) {
+      thread.likes.push(userId);
+    } else {
+      thread.likes.splice(likeIndex, 1);
+    }
+    await thread.save();
+
+    res.status(200).json({
+      likes: thread.likes.length,
+      likedByUser: likeIndex === -1,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 module.exports = {
-    getposts,
-    getPost,
-    createPost,
-    deletePost,
-    updatePost,
-    increaseVoteCount,
-    decreaseVoteCount
-   
-}
+    getThreads,
+    getThread,
+    createThread,
+    deleteThread,
+    updateThread,
+    toggleLike,
+};

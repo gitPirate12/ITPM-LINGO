@@ -18,9 +18,10 @@ const replySchema = new Schema(
       type: String,
       required: true,
     },
-    voteCount: {
-      type: Number,
-      default: 0,
+    likes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
     },
     parentReplyId: {
       type: Schema.Types.ObjectId,
