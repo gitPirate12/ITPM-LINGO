@@ -28,12 +28,11 @@ const replySchema = new Schema(
       ref: "Reply",
       default: null,
     },
-    replies: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Reply",
-      },
-    ],
+    replies: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Reply",
+      default: [],
+    },
   },
   { timestamps: true }
 );
