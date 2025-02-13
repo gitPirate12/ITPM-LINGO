@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Routes
-const PostRoutes = require('./routes/posts');
+const ThreadRoutes = require('./routes/threads');
 const ReplyRoutes = require('./routes/replies');
 const userRoutes = require('./routes/users');
 const emojiRouter = require('./routes/emoji');
@@ -24,7 +24,7 @@ app.use(cors());
 
 
 // Routes
-app.use('/api/posts', PostRoutes);
+app.use('/api/threads', ThreadRoutes);
 app.use('/api/replies', ReplyRoutes);
 app.use('/api/users', userRoutes);
 app.use('/emoji', emojiRouter);
