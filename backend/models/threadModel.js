@@ -2,18 +2,18 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema({
-    question: {
+const threadSchema = new Schema({
+    headline: {
         type: String,
         required: true,
       },
-      description: {
+      body: {
         type: String,
       },
       author: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: "userInfoDetail",
+        ref: "User",
       },
       replies: {
         type: [mongoose.Schema.Types.ObjectId],
@@ -28,12 +28,7 @@ const postSchema = new Schema({
         type: Number,
         default: 0,
       }
-      
-
-      
-        
-      
     
 }, { timestamps: true });
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Thread', postSchema);

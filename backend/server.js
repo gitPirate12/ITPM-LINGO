@@ -21,11 +21,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors());
 
-// // Logging middleware
-// app.use((req, res, next) => {
-//   console.log(req.path, req.method);
-//   next();
-// });
+
 
 // Routes
 app.use('/api/posts', PostRoutes);
@@ -34,7 +30,7 @@ app.use('/api/users', userRoutes);
 app.use('/emoji', emojiRouter);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URL)
   .then(() => {
     console.log('✅ MongoDB Connection Success! ✅');
     // Start server after successful database connection
