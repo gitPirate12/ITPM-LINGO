@@ -4,7 +4,9 @@ const requireAuth = require("../middleware/requireAuth");
 
 const getThreads = async (req, res) => {
   try {
-    const threads = await Thread.find({}).sort({ createdAt: -1 });
+    const threads = await Thread.find({})
+    .populate("author", "firstName lastName ")
+    .sort({ createdAt: -1 });
     res.status(200).json(threads);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

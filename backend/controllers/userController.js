@@ -26,15 +26,15 @@ const loginUser = async (req, res) => {
 
 // Signup user
 const signupUser = async (req, res) => {
-  const { email, password, firstName, lastName, city } = req.body;
+  const { email, password, firstName, lastName, userName } = req.body;
 
   try {
-      const user = await User.signup(email, password, firstName, lastName, city);
+      const user = await User.signup(email, password, firstName, lastName, userName);
 
       // create a token
       const token = createToken(user._id);
 
-      res.status(200).json({ email, token , password, firstName, lastName, city});
+      res.status(200).json({ email, token , password, firstName, lastName, userName});
   } catch (error) {
       res.status(400).json({ error: error.message });
   }
@@ -70,7 +70,7 @@ const deleteUserProfile = async (req, res) => {
 // Update user profile
 const updateUserProfile = async (req, res) => {
   try {
-      const { firstName, lastName, city } = req.body;
+      const { firstName, lastName, userName } = req.body;
 
       // Retrieve user from database
       const user = await User.findById(req.user.id);
@@ -82,7 +82,7 @@ const updateUserProfile = async (req, res) => {
       // Update user details
       if (firstName) user.firstName = firstName;
       if (lastName) user.lastName = lastName;
-      if (city) user.city = city;
+      if (userName) user.userName = userName;
 
       // Save updated user details
       await user.save();
