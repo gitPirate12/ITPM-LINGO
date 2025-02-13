@@ -9,7 +9,7 @@ const {
     updatePost,
     increaseVoteCount,
     decreaseVoteCount
-} = require('../controllers/postController');
+} = require('../controllers/threadController');
 
 // Get all posts
 router.get('/', getposts);

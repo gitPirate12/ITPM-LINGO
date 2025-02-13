@@ -1,10 +1,10 @@
-const Post = require('../models/postModel')
+const Post = require('../models/threadModel')
 const mongoose = require('mongoose')
 const requireAuth = require('../middleware/requireAuth')
 
 
 
-//get all posts
+//get all threads
 const getposts = async (req, res) => {
     try {
         const posts = await Post.find({}).sort({ createdAt: -1 });
@@ -16,7 +16,7 @@ const getposts = async (req, res) => {
 
 
 
-//get a single post
+//get a single thread
 const getPost = async(req,res) =>{
     const {id} = req.params
 
@@ -34,7 +34,7 @@ const getPost = async(req,res) =>{
 
 
 
-// Create new post 
+// Create a new  thread
 const createPost = async (req, res) => {
     const { question, description, tags } = req.body; // Destructure tags from req.body
     const author = req.user._id; // Get the authenticated user's ID from the request
@@ -49,7 +49,7 @@ const createPost = async (req, res) => {
 }
 
 
-//delete a post
+//delete a thread
 
 const deletePost = async(req,res) =>{
     const {id} = req.params
@@ -66,7 +66,7 @@ const deletePost = async(req,res) =>{
 
     res.status(200).json(post)
 }
-//update a post
+//update a thread
 const updatePost = async(req,res) =>{
     const {id} = req.params
 

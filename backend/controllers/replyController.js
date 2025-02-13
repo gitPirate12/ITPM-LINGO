@@ -1,7 +1,7 @@
 const Reply = require('../models/replyModel')
 const mongoose = require('mongoose')
 const requireAuth = require('../middleware/requireAuth')
-const Post = require('../models/postModel')
+const Post = require('../models/threadModel')
 
 
 
