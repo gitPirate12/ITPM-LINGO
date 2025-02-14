@@ -1,0 +1,120 @@
+.sideBar-container {
+  
+  background-color: transparent;
+  width: 400px;
+  height: 100vh;
+  position: fixed;
+  color: white;
+  border-right:  1px solid rgb(179, 186, 198);
+  padding-right: 0;
+}
+
+
+
+
+
+.sideBar-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sideBar-title h1 {
+  margin: 0 0 80px 0;
+  white-space: nowrap;
+  
+}
+
+.sideBar-content {
+  padding-top: 20px;
+  position: relative;
+  padding-left: 60px;
+}
+
+.account-menu {
+  display: flex;
+  margin-top: 300px;
+}
+
+.sideBar-list .sideBar-title {
+  margin-bottom: 20px;
+}
+
+.sideBar-list li {
+  margin-bottom: 15px;
+}
+
+.thread-btn {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  font-size: large;
+  border: none;
+  border-radius: 25px;
+  padding: 10px;
+  width: 70%;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.account-menu-edit-icon {
+  display: flex;
+  margin-left: 90px;
+}
+
+.account-menu p {
+  margin: 0;
+}
+
+.username {
+  color: grey;
+}
+
+.sideBar-list li a {
+  color: white;
+  text-decoration: none;
+  font-size:larger;
+  
+}
+
+.sideBar-list a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.sideBar-list li :hover,
+.account-menu-edit-icon:hover {
+  color: rgb(179, 186, 198);
+  cursor: pointer;
+}
+
+.thread-btn:hover {
+  background-color: rgb(179, 186, 198);
+  cursor: pointer;
+}
+
+@media(max-width:750px){
+  .sideBar-container {
+    width: 200px;
+  }
+  .sideBar-title h1 {
+    font-size:large;
+    
+  }
+  .account-menu {
+    display: flex;
+    margin-top: 200px;
+  }
+}
+
+@media(min-width:751px) and (max-width:999px){
+  .sideBar-container {
+    width: 300px;
+  }
+}
+
+
+@media(min-width:1000px){
+  .sideBar-container {
+    width: 400px;
+  }
+}
