@@ -1,0 +1,81 @@
+.header-container h1 {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  margin: 0 0 20px 0;
+  font-size: 1.7rem;
+  
+}
+
+.thread{
+  color: white;
+  border: 1px solid rgb(179, 186, 198);
+  border-radius: 5px;
+}
+
+.thread-info{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 3px;
+  position: relative;
+  
+}
+
+.author-name{
+  font-weight: bold;
+  font-size: medium;
+  margin: 0;
+}
+
+.author-extras{
+  color: darkgrey;
+  font-weight: 200;
+  font-size: medium;
+  margin: 0;
+}
+
+.thread-title{
+  margin: 0;
+}
+
+.thread-content{
+  margin: 0;
+  font-weight: 300;
+}
+
+.threads-container{
+  display: flex;
+  
+  flex-direction: column;
+  padding: 10px 10px 0 10px;
+  gap: 5px;
+  
+}
+
+.thread-info .options{
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  gap: 5px;
+}
+
+.thread-content-container{
+  padding: 5px;
+}
+
+.tag{
+  
+  color: darkgray;
+  margin:2px 2px 2px 0 ;
+  font-weight: 200;
+  font-size: small;
+}
+
+.thread-actions{
+  display: flex;
+  justify-content:space-evenly;
+}

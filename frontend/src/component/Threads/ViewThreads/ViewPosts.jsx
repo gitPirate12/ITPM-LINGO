@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './ViewPosts.css';
-import DeletePost from './DeletePost';
-import HandleVote from './HandleVote';
-import DeleteReply from './DeleteReply';
-import EditReply from './EditReply';
-import GenerateReport from './GenerateReport'; // Import the GenerateReport component
-import { useLogin } from '../../hooks/useLogin'; // Import the useLogin hook
+import DeletePost from '../DeletePost';
+import HandleVote from '../HandleVote';
+import DeleteReply from '../DeleteReply';
+import EditReply from '../EditReply';
+import GenerateReport from '../GenerateReport'; 
+import { useLogin } from '../../../hooks/useLogin'; 
 
 function ViewPosts() {
   const [posts, setPosts] = useState([]);
@@ -16,7 +16,7 @@ function ViewPosts() {
   const [editReplyId, setEditReplyId] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
-  const { isLoading, error: loginError } = useLogin(); // Use the useLogin hook to handle user login
+  const { isLoading, error: loginError } = useLogin(); 
 
   const fetchPosts = async () => {
     try {

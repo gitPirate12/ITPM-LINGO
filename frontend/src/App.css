@@ -24,3 +24,26 @@ body::before {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
+.layout {
+  display: grid;
+  grid-template-columns: 400px 1fr 400px; 
+  height: 100vh; 
+}
+
+.side-bar {
+  grid-column: 1; 
+   
+}
+
+.threads {
+  grid-column: 2; 
+  border-right: solid 1px rgb(179, 186, 198);
+  overflow-y: auto; 
+}
+
+.extras {
+  grid-column: 3; 
+ 
+}
