@@ -1,27 +1,21 @@
 .sideBar-container {
-  
   background-color: transparent;
   width: 400px;
   height: 100vh;
   position: fixed;
   color: white;
-  border-right:  1px solid rgb(179, 186, 198);
+  border-right: 1px solid rgb(179, 186, 198);
   padding-right: 0;
 }
-
-
-
-
 
 .sideBar-list {
   list-style-type: none;
   padding: 0;
 }
 
-.sideBar-title h1 {
-  margin: 0 0 80px 0;
+.sideBar-content h1 {
+  margin: 10px 0 60px 0;
   white-space: nowrap;
-  
 }
 
 .sideBar-content {
@@ -72,8 +66,7 @@
 .sideBar-list li a {
   color: white;
   text-decoration: none;
-  font-size:larger;
-  
+  font-size: larger;
 }
 
 .sideBar-list a {
@@ -92,28 +85,54 @@
   cursor: pointer;
 }
 
-@media(max-width:750px){
+@media (max-width: 750px) {
   .sideBar-container {
     width: 200px;
   }
-  .sideBar-title h1 {
-    font-size:large;
-    
+  .sideBar-content h1 {
+    font-size: large;
+  }
+
+  .sideBar-list li{
+    font-size: small;
+  }
+  .thread-btn {
+    font-size: medium;
   }
   .account-menu {
     display: flex;
     margin-top: 200px;
   }
-}
 
-@media(min-width:751px) and (max-width:999px){
-  .sideBar-container {
-    width: 300px;
+  .account-menu p {
+    font-size: 10px;
+  }
+
+  .account-menu-edit-icon {
+    margin-left: 20px;
   }
 }
 
+@media (min-width: 751px) and (max-width: 999px) {
+  .sideBar-container {
+    width: 300px;
+  }
 
-@media(min-width:1000px){
+  .account-menu {
+    display: flex;
+    margin-top: 250px;
+  }
+
+  .account-menu p {
+    font-size: 13px;
+  }
+
+  .account-menu-edit-icon {
+    margin-left: 40px;
+  }
+}
+
+@media (min-width: 1000px) {
   .sideBar-container {
     width: 400px;
   }

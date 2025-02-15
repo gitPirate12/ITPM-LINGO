@@ -7,10 +7,8 @@ const SideBar = () => {
   return (
     <div className="sideBar-container">
       <div className="sideBar-content">
+        <h1>ITPM-LINGO.</h1>
         <ul className="sideBar-list">
-          <li className="sideBar-title">
-            <h1>ITPM-LINGO.</h1>
-          </li>
           <li>
             <a href="/">
               <GoHomeFill />
