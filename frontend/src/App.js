@@ -11,6 +11,7 @@ import ViewThreads from "./component/Threads/ViewThreads/ViewThreads"
 
 
 import SideBar from "./component/SideBar/SideBar";
+import SearchBar from "./component/Searchbar/SearchBar";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         </section>
 
         <section className="extras">
+          <SearchBar />
           <Routes>
             <Route path="/add" element={<Addemoji />} />
             <Route path="emojiText" element={<EmojiText />} />

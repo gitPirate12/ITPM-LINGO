@@ -1,0 +1,10 @@
+.search-bar {
+  border: 3px ridge rgb(179, 186, 198);
+  border-radius: 25px;
+  padding: 13px 40px; 
+  background-color: transparent;
+  position: fixed;
+
+  top: 30px;
+  right: 110px;
+}

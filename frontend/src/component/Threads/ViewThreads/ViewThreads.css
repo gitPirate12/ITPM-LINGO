@@ -1,17 +1,12 @@
-.header-container h1 {
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  margin: 0 0 20px 0;
-  font-size: 1.7rem;
-  
-}
+
+
+
+
 
 .thread{
   color: white;
-  border: 1px solid rgb(179, 186, 198);
+ 
+  border: 4px groove rgb(179, 186, 198);
   border-radius: 5px;
 }
 
@@ -62,6 +57,10 @@
   display: flex;
   gap: 5px;
 }
+.options:hover{
+  cursor: pointer;
+  color: rgb(179, 186, 198);
+}
 
 .thread-content-container{
   padding: 5px;
@@ -76,6 +75,43 @@
 }
 
 .thread-actions{
+  margin-top: 10px;
   display: flex;
-  justify-content:space-evenly;
+  gap: 10px;
+}
+.comment{
+  color: white;
+  font-size: small;
+}
+
+.comment:hover, .like:hover{
+  cursor: pointer;
+  color: rgb(179, 186, 198);
+}
+
+
+
+.thread:hover{
+  cursor: pointer;
+  
+}
+
+/* Hide scrollbar but allow scrolling */
+.threads {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.threads::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
+
+.thread-stats{
+  
+  font-size: small;
+  color: darkgray;
+  margin-left: 20px ;
 }
