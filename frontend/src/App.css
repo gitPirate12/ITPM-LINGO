@@ -48,7 +48,7 @@ body::before {
  
 }
 
-.emoji-translator-container{
+.emoji-translator-container , .translator-container{
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-weight: 300;
@@ -61,14 +61,8 @@ body::before {
 }
 
 
-.translator-container{
-  background-color: red;
-  
-}
 
-.footer{
-  background-color: green;
-}
+
 
 .grid-container {
   display: grid;
@@ -84,19 +78,29 @@ body::before {
 
 
 
- .emoji-translator-container .try{
-  border-radius: 25px;
+ .emoji-translator-container .try , .translator-container .click{
+  border-radius: 18px;
   padding: 10px 20px;
   font-weight:bold ;
   font-size: small;
   background-color: white;
   color: black;
   border: none;
-  transition: background-color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
  
 }  
 
-.emoji-translator-container .try:hover{
-  background-color: rgb(179, 186, 198);
+.emoji-translator-container .try:hover, .translator-container .click:hover {
+  opacity: 0.7;
   cursor: pointer;
+}
+
+.footer{
+  background-color: transparent;
+}
+
+.footer p{
+  font-size: small;
+  text-align: center;
+  color: white;
 }
