@@ -47,3 +47,56 @@ body::before {
   grid-column: 3; 
  
 }
+
+.emoji-translator-container{
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-weight: 300;
+ padding: 10px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center; 
+
+  text-align: center;
+}
+
+
+.translator-container{
+  background-color: red;
+  
+}
+
+.footer{
+  background-color: green;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  padding: 10px 15px;
+  margin-top: 30px;
+ 
+}
+
+
+ 
+
+
+
+ .emoji-translator-container .try{
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-weight:bold ;
+  font-size: small;
+  background-color: white;
+  color: black;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+ 
+}  
+
+.emoji-translator-container .try:hover{
+  background-color: rgb(179, 186, 198);
+  cursor: pointer;
+}

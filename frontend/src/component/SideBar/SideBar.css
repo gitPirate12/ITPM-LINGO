@@ -4,8 +4,6 @@
   height: calc(100vh);
   position: fixed;
   color: white;
-  /* border: 4px inset rgb(179, 186, 198);
-  border-radius: 5px; */
   border-right: 4px inset rgb(179, 186, 198);
   overflow: hidden;
   padding-right: 0;

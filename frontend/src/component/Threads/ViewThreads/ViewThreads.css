@@ -1,117 +1,102 @@
-
-
-
-
-
-.thread{
+.thread {
   color: white;
- 
-  border: 4px groove rgb(179, 186, 198);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 5px;
 }
 
-.thread-info{
+.thread-info {
   display: flex;
   gap: 5px;
   align-items: center;
   margin-bottom: 3px;
   position: relative;
-  
 }
 
-.author-name{
+.author-name {
   font-weight: bold;
   font-size: medium;
   margin: 0;
 }
 
-.author-extras{
+.author-extras {
   color: darkgrey;
   font-weight: 200;
-  font-size: medium;
+  font-size: small;
   margin: 0;
 }
 
-.thread-title{
+.thread-title {
   margin: 0;
 }
 
-.thread-content{
+.thread-content {
   margin: 0;
   font-weight: 300;
 }
 
-.threads-container{
+.threads-container {
   display: flex;
-  
+
   flex-direction: column;
   padding: 10px 10px 0 10px;
   gap: 5px;
-  
 }
 
-.thread-info .options{
+.thread-info .options {
   position: absolute;
   right: 0;
   top: 0;
   display: flex;
   gap: 5px;
 }
-.options:hover{
+.options:hover {
   cursor: pointer;
   color: rgb(179, 186, 198);
 }
 
-.thread-content-container{
+.thread-content-container {
   padding: 5px;
 }
 
-.tag{
-  
+.tag {
   color: darkgray;
-  margin:2px 2px 2px 0 ;
+  margin: 2px 2px 2px 0;
   font-weight: 200;
   font-size: small;
 }
 
-.thread-actions{
+.thread-actions {
   margin-top: 10px;
   display: flex;
   gap: 10px;
 }
-.comment{
+.comment {
   color: white;
   font-size: small;
 }
 
-.comment:hover, .like:hover{
+.comment:hover,
+.like:hover {
   cursor: pointer;
   color: rgb(179, 186, 198);
 }
 
-
-
-.thread:hover{
+.thread:hover {
   cursor: pointer;
-  
 }
 
-/* Hide scrollbar but allow scrolling */
 .threads {
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .threads::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
 }
 
-
-
-.thread-stats{
-  
+.thread-stats {
   font-size: small;
   color: darkgray;
-  margin-left: 20px ;
+  margin-left: 20px;
 }

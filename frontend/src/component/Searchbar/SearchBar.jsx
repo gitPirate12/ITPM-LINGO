@@ -1,13 +1,14 @@
 import './SearchBar.css'
 
 
+
 const SearchBar = () => {
   return (
     <div>
       <input
           className="search-bar"
           type="text"
-          placeholder="Search..."
+          placeholder=" &#128269; Search"
           
         />
     </div>

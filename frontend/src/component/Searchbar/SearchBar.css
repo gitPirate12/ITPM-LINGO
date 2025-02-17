@@ -1,10 +1,16 @@
 .search-bar {
-  border: 3px ridge rgb(179, 186, 198);
-  border-radius: 25px;
-  padding: 13px 40px; 
-  background-color: transparent;
-  position: fixed;
+  border-radius: 30px;
+  padding: 10px 30px;
+  border: none;
+}
 
-  top: 30px;
-  right: 110px;
+.search-bar:focus {
+  outline: none;
+  border: 2px solid rgb(179, 186, 198);
+}
+
+.search-bar::placeholder {
+  text-align: center;
+  color: black;
+  font-size: 15px;
 }

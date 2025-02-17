@@ -1,10 +1,8 @@
 import "./ViewThreads.css";
-import { useEffect, useRef, useState } from "react";
-import Typed from "typed.js";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { IoEllipsisHorizontalSharp } from "react-icons/io5";
 import { BiLike } from "react-icons/bi";
-import { FaRegHeart } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 
 const ViewThreads = () => {
@@ -60,9 +58,7 @@ const ViewThreads = () => {
                 <FaChevronDown /> 30 replies
               </p>
             </div>
-            
           </div>
-          
         ))}
       </div>
     </div>
