@@ -4,10 +4,7 @@ const Schema = mongoose.Schema;
 
 const threadSchema = new Schema(
   {
-    headline: {
-      type: String,
-      required: true,
-    },
+    
     body: {
       type: String,
     },

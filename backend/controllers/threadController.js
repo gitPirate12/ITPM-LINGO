@@ -5,7 +5,15 @@ const requireAuth = require("../middleware/requireAuth");
 const getThreads = async (req, res) => {
   try {
     const threads = await Thread.find({})
-    .populate("author", "firstName lastName ")
+    .populate("author", "firstName lastName userName")
+    .populate({
+      path: "replies",
+      select: "author content likes replies parentReplyId",
+      populate: {
+        path: "author",
+        select: "firstName lastName", 
+      },
+    })
     .sort({ createdAt: -1 });
     res.status(200).json(threads);
   } catch (error) {
@@ -29,11 +37,11 @@ const getThread = async (req, res) => {
 };
 
 const createThread = async (req, res) => {
-  const { headline, body, tags } = req.body;
+  const {  body, tags } = req.body;
   const author = req.user._id;
 
   try {
-    const thread = await Thread.create({ headline, body, author, tags });
+    const thread = await Thread.create({ body, author, tags });
     res.status(200).json(thread);
   } catch (error) {
     res.status(400).json({ error: error.message });
