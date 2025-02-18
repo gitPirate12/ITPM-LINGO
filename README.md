@@ -8,7 +8,7 @@
 
 ## 🚀 Project Overview
 
-ITPM-LINGO is a comprehensive web platform designed to support new Sinhala language learners through:
+ITPM-LINGO is a web platform designed to support new Sinhala language learners through:
 
 ✅ **Language Tools**
 - Real-time Sinhala translation
