@@ -1,73 +1,70 @@
-# IT3040 - LINGO TRANSLATE
+# 🌐 ITPM-LINGO: Sinhala Language Learning Community Platform
 
-LINGO TRANSLATE utilizes the MERN stack (MongoDB, Express.js, React.js, Node.js) to create a comprehensive translation webapp. Here's an overview of its key features:
+[![React](https://img.shields.io/badge/React-18.2.0-blue)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18.16.0-green)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-6.0-compatible)](https://www.mongodb.com/)
 
-## Translator App
-LINGO TRANSLATE serves as a translator application from English to Sinhala. It considers cultural context, ensuring accurate and relevant translations. For example, words like "orange" may have nuanced meanings based on context, which this app accounts for.
+**Disclaimer:** This is a work in progress personal project. Features may change and improve over time as I plan on documenting my progress as a web develper through this project.
 
-## Forum
-The project includes a forum for users to post questions and receive responses, fostering collaboration and knowledge sharing within the IT community.
+## 🚀 Project Overview
 
-## Emoji Translator
-LINGO TRANSLATE features an emoji translator, bridging the gap between textual and visual expressions, enhancing communication.
+ITPM-LINGO is a comprehensive web platform designed to support new Sinhala language learners through:
 
-## Authentication and Profile Management
-Proper authentication mechanisms are in place for secure user access. Users can create accounts, log in securely, and manage profiles, fostering a sense of community within the platform.
+✅ **Language Tools**
+- Real-time Sinhala translation
+- Emoji-based language learning
+- Collaborative forum
 
-## Voice Recognition Translation
-The app supports voice recognition translation, allowing users to input voice commands or text and receive real-time translations, enhancing accessibility.
+✅ **Core Features**
+- JWT authentication system
+- Thread-based discussion forum
+- User profile management
+- Interactive translation tools
 
-LINGO TRANSLATE aims to streamline language translation, facilitate community collaboration, and provide a seamless user experience in the IT domain.
+## 🔨 Current Development Focus
 
-## Running the Project
+### 🛠️ Recent Improvements
+- Implemented thread fetching & rendering
+- Created basic forum functionality
+- Developed translation service integration
 
-### Installing Packages
-Before running the project, ensure you have Node.js and npm (Node Package Manager) installed on your system.
+### 📋 Upcoming Features
+- [ ] Dynamic post creation system
+- [ ] User-specific thread management
+- [ ] Comment editing/deletion functionality
+- [ ] Enhanced search implementation
+- [ ] UI/UX improvements for translation tools
+- [ ] Authentication system overhaul
 
-1. Clone the repository to your local machine:
-    ```bash
-    git clone <repository-url>
-    ```
+## 💻 Technology Stack
 
-2. Navigate to the project directory:
-    ```bash
-    cd ITPM-LINGO/backend
-    ```
+**Frontend**
+- React 18
+- CSS Modules
+- Axios for API communication
 
-3. Install server-side dependencies:
-    ```bash
-    npm install
-    ```
+**Backend**
+- Node.js & Express
+- MongoDB Atlas
+- JWT Authentication
 
-4. Navigate to the client directory:
-    ```bash
-    cd ITPM-LINGO/frontend
-    ```
+**APIs**
+- [Postman Documentation](https://documenter.getpostman.com/view/26831435/2sAYdZsYdc)
 
-5. Install client-side dependencies:
-    ```bash
-    npm install
-    ```
 
-### Running the Project
-After installing the necessary packages, you can run the project with the following commands:
 
-1. Start the server:
-    ```bash
-    npm run dev
-    ```
-
-2. Start the client:
-    ```bash
-    npm start
-    ```
-
-By default, the server runs on port 3040 and the client runs on port 3000. Ensure that MongoDB is running on your system.
-
-## Testing
-
-### Running Tests
-To run tests for this project, use the following command:
+## 🛠️ Installation
 
 ```bash
-npm test
+# Clone repository
+git clone https://github.com/yourusername/ITPM-LINGO.git
+
+# Install dependencies
+cd client && npm install
+cd ../server && npm install
+
+# Start development servers
+npm run dev (client)
+npm run dev (server)
+
+
