@@ -68,12 +68,12 @@ function App() {
 
             <div className="footer">
               <p>
-                Loosely designed in <strong>Galileo AI</strong> and built with <strong>React.js</strong> and <strong>CSS</strong> by yours truly.
+                Loosely designed in <strong>Galileo AI</strong> and built with{" "}
+                <strong>React.js</strong> and <strong>CSS</strong> by yours
+                truly.
               </p>
               <p>© 2025 Aneeq Shaffy</p>
             </div>
-
-            {/* <EmojiTranslator /> */}
           </div>
           <Routes></Routes>
         </section>
