@@ -1,33 +1,28 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const User = require('../models/userModel');
+const User = require("../models/userModel");
+const requireAuth = require("../middleware/requireAuth");
 
-// Import user controller functions
 const {
-    loginUser,
-    signupUser,
-    getAllUsers,
-    getUserById,
-    deleteUserProfile,
-    updateUserProfile
-} = require('../controllers/userController');
+  loginUser,
+  signupUser,
+  getAllUsers,
+  getUserById,
+  deleteUserProfile,
+  updateUserProfile,
+} = require("../controllers/userController");
 
-// Login route
-router.post('/login', loginUser);
+router.post("/login", loginUser);
 
-// Signup route
-router.post('/signup', signupUser);
-//get all users
-router.get('/', getAllUsers);
-// Get user profile
-router.get('/:id', getUserById);
+router.post("/signup", signupUser);
 
-// Delete user profile
-router.delete('/:id', deleteUserProfile);
+router.get("/", requireAuth, getAllUsers);
 
+router.get("/:id", requireAuth, getUserById);
 
-// Update user profile
-router.put('/:id',  updateUserProfile);
+router.delete("/:id", requireAuth, deleteUserProfile);
+
+router.put("/:id", requireAuth, updateUserProfile);
 
 module.exports = router;
