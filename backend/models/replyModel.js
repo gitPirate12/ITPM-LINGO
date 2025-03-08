@@ -18,9 +18,10 @@ const replySchema = new Schema(
       type: String,
       required: true,
     },
-    voteCount: {
-      type: Number,
-      default: 0,
+    votes: {
+      type: [Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
     },
     parentReplyId: {
       type: Schema.Types.ObjectId,

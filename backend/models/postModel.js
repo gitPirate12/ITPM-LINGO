@@ -25,10 +25,11 @@ const postSchema = new Schema(
       type: [String],
       default: [],
     },
-    voteCount: {
-      type: Number,
-      default: 0,
-    },
+    votes: {
+      type: [Schema.Types.ObjectId],
+      ref: "User",
+      default: [],
+    }
   },
   { timestamps: true }
 );

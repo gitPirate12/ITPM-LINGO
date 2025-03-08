@@ -1,37 +1,25 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const requireAuth = require('../middleware/requireAuth');
+const requireAuth = require("../middleware/requireAuth");
 const {
-    getposts,
-    getPost,
-    createPost,
-    deletePost,
-    updatePost,
-    increaseVoteCount,
-    decreaseVoteCount
-} = require('../controllers/postController');
+  getposts,
+  getPost,
+  createPost,
+  deletePost,
+  updatePost,
+  toggleVoteCount,
+} = require("../controllers/postController");
 
-// Get all posts
-router.get('/', getposts);
+router.get("/", getposts);
 
-// Get a single post
-router.get('/:id', getPost);
+router.get("/:id", getPost);
 
-// Post a new post
-router.post('/', requireAuth, createPost); // Applying requireAuth middleware
+router.post("/", requireAuth, createPost);
 
-// Delete a post
-router.delete('/:id', requireAuth, deletePost); // Applying requireAuth middleware
+router.delete("/:id", requireAuth, deletePost);
 
-// Update a post
-router.patch('/:id', requireAuth, updatePost); // Applying requireAuth middleware
+router.patch("/:id", requireAuth, updatePost);
 
-// UpdateVoteCount of a post
-router.patch('/:id/increaseVoteCount',requireAuth, increaseVoteCount);
-
-// UpdateVoteCount of a post
-router.patch('/:id/decreaseVoteCount',requireAuth, decreaseVoteCount);
-
-    
+router.patch("/:id/toggleVoteCount", requireAuth, toggleVoteCount);
 
 module.exports = router;

@@ -1,44 +1,30 @@
-const express = require('express');
-const requireAuth = require('../middleware/requireAuth');
+const express = require("express");
+const requireAuth = require("../middleware/requireAuth");
 const {
-    getReplies,
-    getReply,
-    createReply,
-    deleteReply,
-    updateReplyVoteCount ,
-    getRepliesByPostId,
-    createNestedReply,
-    getNestedReplies,
-    updateReply
-} = require('../controllers/replyController');
+  getReplies,
+  getReply,
+  createReply,
+  deleteReply,
+  toggleVoteCount,
+  getRepliesByPostId,
+  updateReply,
+} = require("../controllers/replyController");
 
 const router = express.Router();
 
-// Get all replies
-router.get('/', getReplies);
 
-// Get a single reply
-router.get('/:id', getReply);
+router.get("/", getReplies);
 
-// Get  reply by post id
-router.get('/post/:postId', getRepliesByPostId);
 
-router.get('/nested/:replyId', getNestedReplies);
+router.get("/post/:postId", getRepliesByPostId);
 
-// Post a new reply
-router.post('/', requireAuth, createReply); // Applying requireAuth middleware
-// Post a new nested reply
-router.post('/:postId/:parentReplyId', requireAuth, createNestedReply); // Applying requireAuth middleware
 
-// Delete a reply
-router.delete('/:id', deleteReply); // Applying requireAuth middleware
+router.get("/:id", getReply);
 
-// Upvote reply
-router.patch('/:id/upvote', requireAuth, updateReplyVoteCount);
 
-// Downvote reply
-router.patch('/:id/downvote', requireAuth, updateReplyVoteCount);
-
-router.patch('/:id', requireAuth, updateReply);
+router.post("/", requireAuth, createReply);
+router.delete("/:id", requireAuth, deleteReply);
+router.patch("/:id/upvote", requireAuth, toggleVoteCount);
+router.patch("/:id", requireAuth, updateReply);
 
 module.exports = router;
