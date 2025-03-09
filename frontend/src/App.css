@@ -1,6 +1,38 @@
-.App{
-   
+/* Add this to your CSS file (e.g., App.css) */
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  P{
+    margin: 0;
+    color: rgb(179,186,198);
+  }
+  
+  .noise-texture {
+    position: relative;
+    background: linear-gradient(45deg, #000000, #1a1a1a);
+    width: 100%;
+    min-height: 100vh; /* Changed from height to min-height for better responsiveness */
+  }
+  
+  .noise-texture::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  
+  /* Add this class to your main container */
+  .app-container {
+    position: relative;
     min-height: 100vh;
-    display:flex;
-    flex-direction: column;
-}
+  }
