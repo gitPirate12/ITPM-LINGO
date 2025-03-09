@@ -1,10 +1,12 @@
 const Emoji = require("../models/emojiModel");
 const mongoose = require("mongoose");
 
+// Create a new emoji if it doesn't already exist
 const addEmoji = async (req, res) => {
   const { emoji, meaningEng, meaningSin } = req.body;
 
   try {
+    // Check if emoji already exists
     const existingEmoji = await Emoji.findOne({ emoji });
     if (existingEmoji) {
       return res
@@ -28,6 +30,7 @@ const addEmoji = async (req, res) => {
   }
 };
 
+// Retrieve all emojis
 const getAllEmoji = async (req, res) => {
   Emoji.find()
     .then((emojis) => {
@@ -41,6 +44,7 @@ const getAllEmoji = async (req, res) => {
     });
 };
 
+// Update an existing emoji by its ID
 const updateEmoji = async (req, res) => {
   const { emoji, meaningEng, meaningSin } = req.body;
   const emojiId = req.params.id;
@@ -60,6 +64,7 @@ const updateEmoji = async (req, res) => {
   }
 };
 
+// Delete an emoji by its ID
 const deleteEmoji = async (req, res) => {
   const emojiId = req.params.id;
 
@@ -78,6 +83,7 @@ const deleteEmoji = async (req, res) => {
   }
 };
 
+// Get an emoji by its ID
 const getEmojiById = async (req, res) => {
   const emojiId = req.params.id;
 
@@ -96,19 +102,18 @@ const getEmojiById = async (req, res) => {
   }
 };
 
+// Search for an emoji by its symbol
 const searchEmoji = async (req, res) => {
   const enteredEmoji = req.params.emoji;
 
   try {
     const emoji = await Emoji.findOne({ emoji: enteredEmoji });
     if (emoji) {
-      res
-        .status(200)
-        .json({
-          status: "Emoji found",
-          meaningEng: emoji.meaningEng,
-          meaningSin: emoji.meaningSin,
-        });
+      res.status(200).json({
+        status: "Emoji found",
+        meaningEng: emoji.meaningEng,
+        meaningSin: emoji.meaningSin,
+      });
     } else {
       res.status(404).json({ status: "Emoji not found" });
     }

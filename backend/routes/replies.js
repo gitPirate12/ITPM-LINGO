@@ -12,19 +12,15 @@ const {
 
 const router = express.Router();
 
-
 router.get("/", getReplies);
-
 
 router.get("/post/:postId", getRepliesByPostId);
 
-
 router.get("/:id", getReply);
-
 
 router.post("/", requireAuth, createReply);
 router.delete("/:id", requireAuth, deleteReply);
-router.patch("/:id/upvote", requireAuth, toggleVoteCount);
+router.patch("/:id/toggleVoteCount", requireAuth, toggleVoteCount);
 router.patch("/:id", requireAuth, updateReply);
 
 module.exports = router;
