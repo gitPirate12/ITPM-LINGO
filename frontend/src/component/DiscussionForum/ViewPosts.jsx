@@ -6,8 +6,8 @@ import { ThumbUp, ThumbDown, Edit, AddComment, ArrowDropUp, ArrowDropDown } from
 import DeletePost from './DeletePost';
 import DeleteReply from './DeleteReply';
 import EditReply from './EditReply';
-import GenerateReport from './GenerateReport'; // Import the GenerateReport component
-import { useLogin } from '../../hooks/useLogin'; // Import the useLogin hook
+import GenerateReport from './GenerateReport'; 
+import { useLogin } from '../../hooks/useLogin'; 
 import HandleVote from './HandleVote';
 
 function ViewPosts() {
@@ -29,7 +29,7 @@ function ViewPosts() {
           const replies = repliesResponse.data;
           return {
             ...post,
-            author: `${authorInfo.data.firstName} ${authorInfo.data.lastName}`,
+            author: `${authorInfo.data.userName} `,
             replies: replies
           };
         } catch (error) {

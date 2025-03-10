@@ -33,7 +33,7 @@ function Navbar() {
           onClick={() => handleLinkClick("emoji")}
           to="/emojiText"
         >
-          Emoji to Text
+          Emoji Translator
         </Link>
         <Link
           className={`nav-link-forum ${

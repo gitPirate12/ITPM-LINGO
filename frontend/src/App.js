@@ -2,7 +2,7 @@ import Navbar from "./component/Navbar/Navbar";
 
 import Footer from "./component/Footer/Footer";
 
-import Addemoji from "./component/EmojiText/Addemoji";
+
 
 import EmojiText from "./component/EmojiText/EmojiText";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -27,7 +27,6 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/add" element={<Addemoji />} />
             <Route path="emojiText" element={<EmojiText />} />
             <Route path="/viewposts" element={<ViewPosts />} />
             <Route path="/addpost" element={<AddPost />} />
