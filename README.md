@@ -1,5 +1,5 @@
 # ITPM-LINGO
-ITPM-LINGO is a group project developed for the ITPM assignment. It’s a translator app that includes a forum and an emoji translation feature from Sinhala to English. The application is built using the MERN stack (MongoDB, Express, React, and Node.js) and features JWT authentication for secure user access.
+ITPM-LINGO is a web app developed for the ITPM assignment. It’s a translator app that includes a forum and an emoji translation feature from Sinhala to English. The application is built using the MERN stack (MongoDB, Express, React, and Node.js) and features JWT authentication for secure user access.
 
 ## Running the Project
 
