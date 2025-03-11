@@ -7,7 +7,14 @@ const getposts = async (req, res) => {
     const posts = await Post.find({}).sort({ createdAt: -1 }).populate({
       path: "author",
       select: "userName",
-    });
+    })
+    .populate({
+      path: 'replies', // Populates the replies
+      populate: {
+        path: 'author', // Also populate the author inside each reply
+        select: 'userName',
+      },
+    })
 
     res.status(200).json(posts);
   } catch (error) {
