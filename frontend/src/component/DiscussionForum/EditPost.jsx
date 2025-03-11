@@ -1,125 +1,124 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom'; // Import useNavigate and useParams hooks
-import { useLogin } from '../../hooks/useLogin'; // Import the useLogin hook
-import { Typography, TextField, Button, Box } from '@mui/material'; // Import Material UI components
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import "./EditPost.css";
 
 function EditPost() {
-  const navigate = useNavigate(); // Initialize navigate function from useNavigate
-  const { login } = useLogin(); // Use the useLogin hook to handle user login
-  const { postId } = useParams(); // Extract postId from URL params
-
-  const [question, setQuestion] = useState('');
-  const [description, setDescription] = useState('');
-  const [tags, setTags] = useState('');
+  const navigate = useNavigate();
+  const { postId } = useParams();
+  const [formData, setFormData] = useState({
+    question: "",
+    description: "",
+    tags: "",
+  });
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch the post details when the component mounts
     const fetchPostDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3040/api/posts/${postId}`);
-        const postData = response.data;
-        // Set the post details in the state
-        setQuestion(postData.question);
-        setDescription(postData.description);
-        setTags(postData.tags.join(', ')); // Convert tags array to string
+        const response = await axios.get(
+          `http://localhost:3040/api/posts/${postId}`
+        );
+        const { question, description, tags } = response.data;
+        setFormData({
+          question,
+          description,
+          tags: tags.join(", "),
+        });
       } catch (error) {
-        console.error('Error fetching post details:', error);
-        setError('Error fetching post details');
+        console.error("Error fetching post details:", error);
+        setError("Error fetching post details");
       }
     };
-
     fetchPostDetails();
-  }, [postId]); // Fetch post details whenever postId changes
+  }, [postId]);
 
-  const handleQuestionChange = (e) => {
-    setQuestion(e.target.value);
-  };
-
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
-  };
-
-  const handleTagsChange = (e) => {
-    setTags(e.target.value);
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
     try {
-      // Check if the user is logged in before updating the post
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (!user) {
-        // If user is not logged in, redirect to login page or display a message
-        return;
-      }
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) return;
 
-      // Attach the authentication token to the request headers
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
+      await axios.patch(
+        `http://localhost:3040/api/posts/${postId}`,
+        {
+          ...formData,
+          tags: formData.tags.split(",").map((tag) => tag.trim()),
         },
-      };
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
 
-      // Send PATCH request to update the post
-      const response = await axios.patch(`http://localhost:3040/api/posts/${postId}`, {
-        question,
-        description,
-        tags: tags.split(',').map(tag => tag.trim()) // Convert comma-separated tags to an array
-      }, config);
-
-      // Log the response data
-      console.log(response.data);
-
-      // Optionally, you can handle success or display a message
-
-      // Redirect to view post page after successful update
-      navigate('/viewposts');
+      navigate("/viewposts");
     } catch (error) {
-      // Log any errors that occur during form submission
-      console.error('Error updating post:', error);
-      setError(error.message || 'Error updating post');
+      console.error("Error updating post:", error);
+      setError(error.response?.data?.message || "Error updating post");
     }
   };
 
   return (
-    <Box className='EditPost' minHeight="100vh" padding="20px">
-      <Typography variant="h4" sx={{ mb: 2 }}>Edit Post</Typography>
-      {error && <Typography color="error">Error: {error}</Typography>}
-      <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Question"
-          value={question}
-          onChange={handleQuestionChange}
-          required
-          sx={{ mb: 2 }} // Add margin bottom
-        />
-        <TextField
-          fullWidth
-          multiline
-          rows={4}
-          label="Description"
-          value={description}
-          onChange={handleDescriptionChange}
-          required
-          sx={{ mb: 2 }} // Add margin bottom
-        />
-        <TextField
-          fullWidth
-          label="Tags"
-          value={tags}
-          onChange={handleTagsChange}
-          helperText="Separate tags with commas (e.g., tag1, tag2, tag3)"
-          sx={{ mb: 2 }} // Add margin bottom
-        />
-        <Button type="submit" variant="contained">Save Changes</Button>
+    <div className="edit-post-container">
+      <h1 className="edit-post-header">Edit Post</h1>
+      {error && <div className="error-message">{error}</div>}
+
+      <form className="edit-post-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="question">Question</label>
+          <input
+            type="text"
+            id="question"
+            name="question"
+            value={formData.question}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+            rows="4"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="tags">Tags (comma separated)</label>
+          <input
+            type="text"
+            id="tags"
+            name="tags"
+            value={formData.tags}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="button-group">
+          <button type="submit" className="submit-button">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={() => navigate("/viewposts")}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
-      {/* Button to go back to view post page */}
-      <Button onClick={() => navigate('/viewposts')} sx={{ mt: 2 }}>Back</Button>
-    </Box>
+    </div>
   );
 }
 

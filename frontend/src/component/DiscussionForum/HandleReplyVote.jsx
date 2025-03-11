@@ -1,40 +1,62 @@
-import React from 'react';
-import { useLogin } from '../../hooks/useLogin'; // Import the useLogin hook
+import React, { useState, useEffect } from "react";
+import { AiOutlineHeart } from "react-icons/ai";
+import axios from "axios";
 
-function HandleReplyVote({ replyId, type }) {
-  const { isLoading, error } = useLogin(); // Use the useLogin hook to handle user login
+function HandleReplyVote({ replyId, votes: initialVotes, onVoteUpdate }) {
+  const [user] = useState(() => JSON.parse(localStorage.getItem("user")));
+  const [votes, setVotes] = useState(initialVotes || []);
+  const [isVoted, setIsVoted] = useState(false);
 
-  const handleVote = async (voteType) => {
+  useEffect(() => {
+    if (user) {
+      setIsVoted(votes.includes(user._id));
+    }
+  }, [votes, user]);
+
+  const handleToggleVote = async () => {
+    if (!user) {
+      alert("Please login to vote");
+      return;
+    }
+
     try {
-      // Extract token from localStorage
-      const token = JSON.parse(localStorage.getItem('user'))?.token;
+      
+      const newVotes = isVoted
+        ? votes.filter((vote) => vote !== user._id)
+        : [...votes, user._id];
 
-      // Check if token exists
-      if (!token) {
-        throw new Error('User not authenticated');
-      }
+      setVotes(newVotes);
+      setIsVoted(!isVoted);
 
-      // Send a PATCH request to update the reply vote count
-      const response = await fetch(`http://localhost:3040/api/replies/${replyId}/${voteType}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (!response.ok) {
-        throw new Error('Failed to vote on reply');
-      }
-      // Handle success, maybe update UI or show a success message
+      
+      const response = await axios.patch(
+        `http://localhost:3040/api/replies/${replyId}/toggleVoteCount`,
+        {},
+        { headers: { Authorization: `Bearer ${user.token}` } }
+      );
+
+     
+      setVotes(response.data.votes);
+      setIsVoted(response.data.votes.includes(user._id));
+      onVoteUpdate?.(replyId, response.data.votes.length);
     } catch (error) {
-      console.error('Error voting on reply:', error);
+      console.error("Error toggling vote:", error);
+      
+      setVotes(initialVotes);
+      setIsVoted(initialVotes.includes(user._id));
     }
   };
 
   return (
-    <div>
-      <button onClick={() => handleVote('upvote')} className="upvote-btn">Upvote</button>
-      <button onClick={() => handleVote('downvote')} className="downvote-btn">Downvote</button>
+    <div className="vote-container">
+      <button
+        onClick={handleToggleVote}
+        className={`vote-button ${isVoted ? "voted" : ""}`}
+        disabled={!user}
+      >
+        <AiOutlineHeart className={`vote-icon ${isVoted ? "active" : ""}`} />
+      </button>
+      <span className="vote-count">{votes.length}</span>
     </div>
   );
 }

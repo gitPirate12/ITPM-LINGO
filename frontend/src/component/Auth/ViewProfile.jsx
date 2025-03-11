@@ -1,45 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
-import { Container, Typography, Button } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { useLogout } from '../../hooks/useLogout'; // Import the useLogout hook
+import { useLogout } from '../../hooks/useLogout';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import './ViewProfile.css';
 
 const ViewProfile = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
-  const { logout } = useLogout(); // Initialize the useLogout hook
+  const { logout } = useLogout();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        // Check if user is logged in
         const storedUser = JSON.parse(localStorage.getItem('user'));
         if (!storedUser) {
           setError('You must be logged in to view the profile');
           return;
         }
 
-        const { token, email } = storedUser; // Extract token and email from stored user
-
+        const { token } = storedUser;
         const decodedToken = jwtDecode(token);
-        const userId = decodedToken._id;
         
-        // Include the token in the request headers
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        };
+        const response = await axios.get(`http://localhost:3040/api/users/${decodedToken._id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
 
-        // Make a GET request to fetch the user profile data using the user ID
-        const response = await axios.get(`http://localhost:3040/api/users/${userId}`, config);
-
-        // Set the user profile data in the component state
         setUser(response.data);
       } catch (error) {
-        // Handle any errors that occur during the fetch
         console.error('Error fetching user profile:', error);
         setError('Error fetching user profile');
       }
@@ -49,78 +39,91 @@ const ViewProfile = () => {
   }, []);
 
   const handleEditProfile = () => {
-    window.location.href = '/editprofile';
+    navigate('/editprofile');
   };
 
   const handleDeleteProfile = async () => {
     try {
-      const storedUser = JSON.parse(localStorage.getItem('user'));
-      if (!storedUser) {
-        setError('You must be logged in to delete the profile');
-        return;
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#1f6feb',
+        cancelButtonColor: '#6e7681',
+        confirmButtonText: 'Yes, delete it!'
+      });
+
+      if (result.isConfirmed) {
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        const { token } = storedUser;
+        const decodedToken = jwtDecode(token);
+
+        await axios.delete(`http://localhost:3040/api/users/${decodedToken._id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        localStorage.removeItem('user');
+        setUser(null);
+        logout();
+        
+        Swal.fire(
+          'Deleted!',
+          'Your profile has been deleted.',
+          'success'
+        );
       }
-
-      const { token } = storedUser; // Extract token from stored user
-
-      const decodedToken = jwtDecode(token);
-      const userId = decodedToken._id;
-
-      // Include the token in the request headers
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      };
-
-      // Make a DELETE request to delete the user profile
-      await axios.delete(`http://localhost:3040/api/users/${userId}`, config);
-
-      // Clear user data from localStorage and state upon successful deletion
-      localStorage.removeItem('user');
-      setUser(null);
-
-      // Logout the user
-      logout(); // Call the logout function from the useLogout hook
     } catch (error) {
-      // Handle any errors that occur during the deletion
       console.error('Error deleting user profile:', error);
       setError('Error deleting user profile');
     }
   };
 
   if (!user) {
-    return <div>No user data found</div>;
+    return <div className="profile-loading">Loading profile...</div>;
   }
 
   return (
-    <Container sx={{ minHeight: '100vh', padding: '20px' }}>
-      <Typography variant="h4" sx={{ marginBottom: '20px' }}>User Profile</Typography>
-      <div>
-        <Typography sx={{ marginBottom: '10px' }}><strong>Email:</strong> {user.email}</Typography>
-        <Typography sx={{ marginBottom: '10px' }}><strong>First Name:</strong> {user.firstName}</Typography>
-        <Typography sx={{ marginBottom: '10px' }}><strong>Last Name:</strong> {user.lastName}</Typography>
-        <Typography sx={{ marginBottom: '10px' }}><strong>City:</strong> {user.city}</Typography>
+    <div className="profile-container">
+      <div className="profile-card">
+        <h2 className="profile-title">User Profile</h2>
+        
+        {error && <div className="profile-error">{error}</div>}
+
+        <div className="profile-details">
+          <div className="profile-detail-item">
+            <span className="detail-label">Email:</span>
+            <span className="detail-value">{user.email}</span>
+          </div>
+          <div className="profile-detail-item">
+            <span className="detail-label">Username:</span>
+            <span className="detail-value">{user.userName}</span>
+          </div>
+        </div>
+
+        <div className="profile-actions">
+          <button 
+            className="profile-button edit-button"
+            onClick={handleEditProfile}
+          >
+            <svg className="button-icon" viewBox="0 0 20 20">
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+            </svg>
+            Edit Profile
+          </button>
+          
+          <button 
+            className="profile-button delete-button"
+            onClick={handleDeleteProfile}
+          >
+            <svg className="button-icon" viewBox="0 0 20 20">
+              <path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"/>
+            </svg>
+            Delete Profile
+          </button>
+        </div>
       </div>
-      <div>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ marginRight: '10px' }}
-          onClick={handleEditProfile}
-          startIcon={<EditIcon />}
-        >
-          Edit Profile
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={handleDeleteProfile}
-          startIcon={<DeleteIcon />}
-        >
-          Delete Profile
-        </Button>
-      </div>
-    </Container>
+    </div>
   );
 };
 

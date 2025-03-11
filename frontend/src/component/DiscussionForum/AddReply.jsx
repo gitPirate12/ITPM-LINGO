@@ -1,75 +1,73 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom'; // Import the useNavigate and useParams hooks
-import { useLogin } from '../../hooks/useLogin'; // Import the useLogin hook
-import { Typography, TextField, Button, Box } from '@mui/material'; // Import Box component from MUI
-import { ArrowBack } from '@mui/icons-material';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import "./AddReply.css";
 
-function AddReply({ parentReplyId, onSuccess }) {
-  const { postId } = useParams(); // Extract postId from URL params
-  const navigate = useNavigate(); // Initialize navigate function from useNavigate
-  const [comment, setComment] = useState('');
-  const { isLoading, error } = useLogin(); // Get login status and error from the useLogin hook
+function AddReply({ parentReplyId }) {
+  const { postId } = useParams();
+  const navigate = useNavigate();
+  const [comment, setComment] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Check if the user is logged in before adding a reply
-      if (!localStorage.getItem('user')) {
-        // If not logged in, return and display an error message
-        console.error('User is not logged in');
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) {
+        setError("Please log in to add a reply");
         return;
       }
 
-      // Get the authentication token from local storage
-      const authToken = JSON.parse(localStorage.getItem('user')).token;
-
-      // Send a POST request to add the reply with the authentication token
-      const response = await axios.post('http://localhost:3040/api/replies', {
-        comment,
-        parentid: postId,
-        parentReplyId
-      }, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
+      await axios.post(
+        "http://localhost:3040/api/replies",
+        {
+          comment,
+          parentid: postId,
+          parentReplyId,
         },
-      });
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
 
-      // Optionally, you can handle success or display a message
-      if (onSuccess) {
-        onSuccess(response.data);
-      }
+      navigate("/viewposts");
     } catch (error) {
-      console.error('Error adding reply:', error);
-      // Optionally, you can handle errors or display an error message
+      console.error("Error adding reply:", error);
+      setError(error.response?.data?.message || "Error adding reply");
     }
   };
 
-  const handleBack = () => {
-    // Navigate back to the view post page
-    navigate('/viewposts');
-  };
-
   return (
-    <div className='addReply' style={{ minHeight: '100vh', padding: '20px' }}>
-      <Typography variant="h4" gutterBottom>Add Reply</Typography>
-      <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          multiline
-          rows={4}
-          label="Reply"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="Type your reply here..."
-          required
-          margin="normal"
-        />
-        <Box display="flex"  alignItems="center" mt={2}> {/* Wrap buttons in a Box with Flexbox styling */}
-          <Button type="submit" variant="contained" disabled={isLoading} style={{ marginRight:'30px' }}>Submit Reply</Button>
-          <Button onClick={handleBack} startIcon={<ArrowBack />}>Back</Button>
-        </Box>
-        {error && <Typography variant="body1" color="error">Error: {error}</Typography>}
+    <div className="add-reply-container">
+      <h1 className="add-reply-header">Add Reply</h1>
+
+      <form className="add-reply-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="comment">Your Reply</label>
+          <textarea
+            id="comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            required
+            rows="4"
+            className="reply-textarea"
+          />
+        </div>
+
+        {error && <div className="error-message">{error}</div>}
+
+        <div className="button-group">
+          <button type="submit" className="submit-button">
+            Post Reply
+          </button>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={() => navigate("/viewposts")}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

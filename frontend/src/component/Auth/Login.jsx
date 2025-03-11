@@ -1,44 +1,59 @@
 import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
-import { Typography, TextField, Button, Box } from '@mui/material'; // Import Material UI components
-import './LoginStyles.css';
+import { useNavigate } from "react-router-dom"; 
+import "./LoginStyles.css";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, isLoading, error } = useLogin();
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(email, password);
+    try {
+      await login(email, password);
+      navigate("/");
+    } catch (error) {
+    }
   };
 
   return (
-    <Box className="login-container" sx={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> {/* Use the new container class */}
-      <form className="login" onSubmit={handleSubmit}>
-        <Typography variant="h5" gutterBottom>Log In</Typography>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleSubmit}>
+        <h2 className="form-title">Log In</h2>
         
-        <TextField
-          fullWidth
-          label="Email address"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          sx={{ mb: 2 }}
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          sx={{ mb: 2 }}
-        />
+        <div className="form-group">
+          <label className="form-label">Email address</label>
+          <input
+            type="email"
+            className="form-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-        <Button type="submit" disabled={isLoading} variant="contained">Log in</Button>
-        {error && <Typography variant="body2" color="error">{error}</Typography>}
+        <div className="form-group">
+          <label className="form-label">Password</label>
+          <input
+            type="password"
+            className="form-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <button 
+          type="submit" 
+          className="login-button"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Logging in...' : 'Log in'}
+        </button>
+        
+        {error && <div className="error-message">{error}</div>}
       </form>
-    </Box>
+    </div>
   );
 };
 

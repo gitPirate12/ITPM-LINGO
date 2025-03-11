@@ -1,47 +1,67 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useLogin } from '../../hooks/useLogin'; // Import the useLogin hook
+import React, { useState } from "react";
+import axios from "axios";
+import "./EditReply.css";
 
-function EditReply({ replyId }) {
-  const [newComment, setNewComment] = useState('');
+function EditReply({ replyId, onCancel }) {
+  const [newComment, setNewComment] = useState("");
   const [error, setError] = useState(null);
-  const { login } = useLogin(); // Use the useLogin hook to handle user login
 
-  const handleEdit = async () => {
+  const handleEdit = async (e) => {
+    e.preventDefault();
     try {
-      // Check if the user is logged in before editing the reply
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem("user"));
       if (!user) {
-        // If user is not logged in, display a message or redirect to login page
-        setError('Please log in to edit the reply');
+        setError("Please log in to edit the reply");
         return;
       }
 
-      // Attach the authentication token to the request headers
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
+      await axios.patch(
+        `http://localhost:3040/api/replies/${replyId}`,
+        {
+          comment: newComment,
         },
-      };
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
 
-      // Send a PATCH request to update the reply
-      await axios.patch(`http://localhost:3040/api/replies/${replyId}`, {
-        comment: newComment
-      }, config);
-
-      // Handle success, maybe close the edit form or show a success message
-      window.location.reload(); // Refresh the page after successful edit
+      onCancel(true); // On successful edit, notify parent (or you can decide to simply cancel)
     } catch (error) {
-      console.error('Error editing reply:', error);
-      setError('Error editing reply');
+      console.error("Error editing reply:", error);
+      setError(error.response?.data?.message || "Error editing reply");
     }
   };
 
   return (
-    <div>
-      <textarea value={newComment} onChange={(e) => setNewComment(e.target.value)} />
-      <button onClick={handleEdit}>Save</button>
-      {error && <div>Error: {error}</div>}
+    <div className="edit-reply-container">
+      <form className="edit-reply-form" onSubmit={handleEdit}>
+        <div className="form-group">
+          <label htmlFor="comment">Edit Comment</label>
+          <textarea
+            id="comment"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            required
+            rows="3"
+            className="reply-textarea"
+          />
+        </div>
+
+        {error && <div className="error-message">{error}</div>}
+
+        <div className="button-group">
+          <button type="submit" className="submit-button">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            className="cancel-button"
+            onClick={() => onCancel(false)}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

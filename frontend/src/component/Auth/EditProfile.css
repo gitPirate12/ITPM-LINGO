@@ -1,27 +1,26 @@
-.login-container {
+.edit-container {
   min-height: 100vh;
+  padding: 2rem;
+  background-color: #0d1117;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0d1117;
 }
 
-.login-form {
+.edit-card {
   background: #161b22;
   border: 1px solid #21262d;
   border-radius: 8px;
   padding: 2rem;
   width: 100%;
-  max-width: 400px;
-  margin: 0 1rem;
+  max-width: 500px;
 }
 
-.form-title {
+.edit-title {
   color: #c9d1d9;
-  text-align: center;
-  margin-bottom: 2rem;
   font-size: 1.5rem;
-  font-weight: 500;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .form-group {
@@ -46,14 +45,23 @@
   transition: border-color 0.2s ease;
 }
 
+.form-input:disabled {
+  background: #161b22;
+  opacity: 0.7;
+}
+
 .form-input:focus {
   outline: none;
   border-color: #1f6feb;
 }
 
-.login-button {
-  width: 100%;
-  padding: 0.8rem;
+.form-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.save-button {
+  padding: 0.8rem 2rem;
   background: #1f6feb;
   color: white;
   border: none;
@@ -64,37 +72,25 @@
   transition: background-color 0.2s ease;
 }
 
-.login-button:hover {
+.save-button:hover {
   background-color: #1158c7;
-}
-
-.login-button:disabled {
-  background-color: #484f58;
-  cursor: not-allowed;
 }
 
 .error-message {
   color: #f85149;
-  margin-top: 1rem;
-  font-size: 0.9rem;
   text-align: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: rgba(248, 81, 73, 0.1);
+  border-radius: 6px;
 }
 
 @media (max-width: 768px) {
-  .login-form {
+  .edit-container {
+    padding: 1rem;
+  }
+  
+  .edit-card {
     padding: 1.5rem;
-    margin: 0 1rem;
-  }
-  
-  .form-title {
-    font-size: 1.3rem;
-  }
-  
-  .form-input {
-    padding: 0.7rem;
-  }
-  
-  .login-button {
-    padding: 0.7rem;
   }
 }

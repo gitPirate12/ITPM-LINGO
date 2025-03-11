@@ -2,8 +2,6 @@ import Navbar from "./component/Navbar/Navbar";
 
 import Footer from "./component/Footer/Footer";
 
-
-
 import EmojiText from "./component/EmojiText/EmojiText";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -24,19 +22,19 @@ function App() {
     <Router>
       <div className="noise-texture app-container">
         <Navbar />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="emojiText" element={<EmojiText />} />
-            <Route path="/viewposts" element={<ViewPosts />} />
-            <Route path="/addpost" element={<AddPost />} />
-            <Route path="/editpost/:postId" element={<EditPost />} />
-            <Route path="/addreply/:postId" element={<AddReply />} />
-            <Route path="/editreply/:replyId" element={<EditReply />} />
-            <Route path="/" element={<Transltor />} />
-            <Route path="/viewprofile" element={<ViewProfile />} />
-            <Route path="/editprofile" element={<EditProfile />} />
-          </Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="emojiText" element={<EmojiText />} />
+          <Route path="/viewposts" element={<ViewPosts />} />
+          <Route path="/addpost" element={<AddPost />} />
+          <Route path="/editpost/:postId" element={<EditPost />} />
+          <Route path="/addreply/:postId" element={<AddReply />} />
+          <Route path="/editreply/:replyId" element={<EditReply />} />
+          <Route path="/" element={<Transltor />} />
+          <Route path="/viewprofile" element={<ViewProfile />} />
+          <Route path="/editprofile" element={<EditProfile />} />
+        </Routes>
         <Footer />
       </div>
     </Router>

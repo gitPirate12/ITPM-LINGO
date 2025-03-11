@@ -1,0 +1,136 @@
+/* ReplyDetails.css */
+.reply-item {
+  background: #161b22;
+  border: 1px solid #21262d;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  color: #c9d1d9;
+  position: relative;
+}
+
+.reply-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reply-creator-details {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.reply-author {
+  color: #1f6feb;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.reply-date {
+  color: #6e7681;
+  font-size: 0.85rem;
+}
+
+.reply-comment {
+  color: #8b949e;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.reply-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #21262d;
+}
+
+.vote-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: #6e7681;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hover-effect:hover {
+  color: #1f6feb;
+  transform: scale(1.1);
+}
+
+.reply-votes {
+  color: #8b949e;
+  font-size: 0.9rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .reply-item {
+    padding: 1rem;
+  }
+  
+  .reply-creator-details {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+  }
+  
+  .reply-actions {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+/* ReplyDetails.css */
+/* Add these new styles */
+.vote-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.vote-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.vote-icon {
+  color: #6e7681;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.voted-icon {
+  color: #da3633;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.vote-count {
+  color: #8b949e;
+  font-size: 0.9rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Update existing reply-actions style */
+.reply-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #21262d;
+}
