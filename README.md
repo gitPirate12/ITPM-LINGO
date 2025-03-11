@@ -1,23 +1,5 @@
-# IT3040 - LINGO TRANSLATE
-
-LINGO TRANSLATE utilizes the MERN stack (MongoDB, Express.js, React.js, Node.js) to create a comprehensive translation webapp. Here's an overview of its key features:
-
-## Translator App
-LINGO TRANSLATE serves as a translator application from English to Sinhala. It considers cultural context, ensuring accurate and relevant translations. For example, words like "orange" may have nuanced meanings based on context, which this app accounts for.
-
-## Forum
-The project includes a forum for users to post questions and receive responses, fostering collaboration and knowledge sharing within the IT community.
-
-## Emoji Translator
-LINGO TRANSLATE features an emoji translator, bridging the gap between textual and visual expressions, enhancing communication.
-
-## Authentication and Profile Management
-Proper authentication mechanisms are in place for secure user access. Users can create accounts, log in securely, and manage profiles, fostering a sense of community within the platform.
-
-## Voice Recognition Translation
-The app supports voice recognition translation, allowing users to input voice commands or text and receive real-time translations, enhancing accessibility.
-
-LINGO TRANSLATE aims to streamline language translation, facilitate community collaboration, and provide a seamless user experience in the IT domain.
+# ITPM-LINGO
+ITPM-LINGO is a group project developed for the ITPM assignment. It’s a translator app that includes a forum and an emoji translation feature from Sinhala to English. The application is built using the MERN stack (MongoDB, Express, React, and Node.js) and features JWT authentication for secure user access.
 
 ## Running the Project
 
@@ -59,15 +41,30 @@ After installing the necessary packages, you can run the project with the follow
 
 2. Start the client:
     ```bash
-    npm start
+    npm run dev
     ```
 
-By default, the server runs on port 3040 and the client runs on port 3000. Ensure that MongoDB is running on your system.
+## Environment Variables
+Create a `.env` file in the root of your project and add the following variables for example:
 
-## Testing
+```env
+MONGODB_URL=mongodb+srv://aneeqshaffy7:loserboy41@itpm-db.f9mla.mongodb.net/ITPM-LINGO-DB
+SECRET=ninjadojoshifuyoshimarioluigipeachbowser
+JWT_SECRET=3B4D8FC6C47CEBEC
+ ```
 
-### Running Tests
-To run tests for this project, use the following command:
 
-```bash
-npm test
+By default, the server runs on port 3040 and the client runs on port 3000. Ensure that MongoDB is running on your system. 
+
+## ScreenShots
+
+![Screenshot of the App](./ScreenShots/Screenshot%201.png)
+![Screenshot 2](./ScreenShots/Screenshot%202.png)
+![Screenshot 3](./ScreenShots/Screenshot%203.png)
+
+## Postman API Documentation
+
+For complete details on our API endpoints, request/response formats, and usage examples, please refer to the Postman documentation:
+
+[ITPM-LINGO API Documentation](https://documenter.getpostman.com/view/26831435/2sAYdZsYdc)
+
